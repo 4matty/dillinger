@@ -6,15 +6,14 @@ module.exports =
   .module('diDocuments.export', [
     'diDocuments.service'
   ])
-  .controller('DocumentsExport', function($scope, $attrs, documentsService) {
+  .controller('DocumentsExport', function($scope, documentsService) {
 
   var vm = this,
       $ = jQuery,
-      $downloader = $('#downloader'),
+      $downloader = $(document.getElementById('downloader')),
       $name = $downloader.find('[name=name]'),
       $unmd = $downloader.find('[name=unmd]'),
-      $formatting = $downloader.find('[name=formatting]'),
-      $preview = $downloader.find('[name=preview]');
+      $formatting = $downloader.find('[name=formatting]');
 
 
   vm.asHTML       = asHTML;
@@ -24,9 +23,6 @@ module.exports =
 
   function initDownload(action, styled) {
     $downloader[0].action = action;
-    $downloader[0].target = $attrs.diTarget;
-
-    $preview.val( $attrs.diTarget === 'preview' );
     $name.val( documentsService.getCurrentDocumentTitle() );
     $unmd.val( documentsService.getCurrentDocumentBody() );
     $formatting.val( styled );
